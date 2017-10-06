@@ -4,5 +4,19 @@ module Api::V1
       @guests = Guest.all
       render json: @guests
     end
+
+    def create
+      guest = Guest.new(secure_guest_params)
+      if guest.save
+        render json: guest
+      else
+        render json: "Could not save on DB!"
+      end
+    end
+
+    private
+    def secure_guest_params
+      params.require(:guest).permit(:name, :is_editing, :is_confirmed)
+    end
   end
 end
