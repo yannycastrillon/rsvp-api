@@ -14,6 +14,12 @@ module Api::V1
       end
     end
 
+    def update
+      guest = Guest.find(params[:id])
+      guest.update_attributes(secure_guest_params)
+      render json: guest
+    end
+    
     private
     def secure_guest_params
       params.require(:guest).permit(:name, :is_editing, :is_confirmed)
