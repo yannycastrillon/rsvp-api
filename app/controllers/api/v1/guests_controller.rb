@@ -19,7 +19,15 @@ module Api::V1
       guest.update_attributes(secure_guest_params)
       render json: guest
     end
-    
+
+    def destroy
+      guest = Guest.find(params[:id])
+      if guest.destroy
+        msg = { status: "ok", message:"Success!", html:"<b>...</b>", guestId: guest.id}
+        render json: msg
+      end
+    end
+
     private
     def secure_guest_params
       params.require(:guest).permit(:name, :is_editing, :is_confirmed)
