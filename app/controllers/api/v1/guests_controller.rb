@@ -23,7 +23,7 @@ module Api::V1
     def destroy
       guest = Guest.find(params[:id])
       if guest.destroy
-        msg = { status: "ok", message:"Success!", html:"<b>...</b>", guestId: guest.id}
+        msg = { status: "ok", message:"Success!", html:"<b>...</b>", guestId: guest.id }
         render json: msg
       end
     end
